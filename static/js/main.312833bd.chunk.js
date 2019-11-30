@@ -1,0 +1,2 @@
+(this.webpackJsonpfilms=this.webpackJsonpfilms||[]).push([[0],{3:function(e,n,t){e.exports=t(8)},8:function(e,n,t){"use strict";t.r(n);var r=t(0),s=t.n(r),a=t(2);var c=function(){return s.a.createElement("div",{className:"App"})};t.n(a).a.render(s.a.createElement(c,null),document.getElementById("root"))}},[[3,1,2]]]);
+//# sourceMappingURL=main.312833bd.chunk.js.map
