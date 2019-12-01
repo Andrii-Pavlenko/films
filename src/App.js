@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+const API_URL = 'http://localhost:5000/api';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.PureComponent {
+  async componentDidMount() {
+    const res = await fetch(API_URL)
+    const data = await res.json()
+
+    console.log(data)
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>home</h1>
+      </div>
+    );
+  }
 }
 
 export default App;
