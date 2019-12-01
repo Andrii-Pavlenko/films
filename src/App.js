@@ -1,10 +1,10 @@
 import React from 'react';
-const API_URL = 'http://localhost:5000/api';
+const API_URL = '/api';
 
 class App extends React.PureComponent {
   async componentDidMount() {
-    const res = await fetch(API_URL)
-    const data = await res.json()
+    const res = await fetch(API_URL);
+    const data = await res.json();
 
     console.log(data)
   }
