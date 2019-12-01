@@ -12,7 +12,7 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "node srver.js",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
