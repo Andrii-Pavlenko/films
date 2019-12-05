@@ -1,0 +1,78 @@
+.form {
+  &__list {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px 200px 200px;
+    grid-gap: 10px;
+    matgin: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__film {
+    background: url("http://www.akfmo.org/img/cultureAT/film.jpg");
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  &__title {
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    width: 100px;
+    position: relative;
+    z-index: 2;
+    margin: 10px;
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+
+    &-delete {
+      background-color: transparent;
+      color: white;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.delete {
+  background-color: transparent;
+  color: white;
+  margin: 10px;
+}
+
+.overlay {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 0;
+  }
+
+  &:hover:before {
+    display: block;
+  }
+}
+
+.blue:before {
+  background-color: rgba(140,138,123,0.5);
+}
+
+

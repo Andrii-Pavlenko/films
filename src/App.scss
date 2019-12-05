@@ -1,0 +1,20 @@
+body,
+li,
+ul,
+a,
+button {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #170b34;
+  color: aliceblue;
+  height: 100%;
+}

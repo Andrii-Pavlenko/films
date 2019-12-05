@@ -1,5 +1,28 @@
-// 'use strict'
+const API_URL = process.env.REACT_APP_API_URL;
+const FILM_URL = `${API_URL}/films`;
 
-// fetch('http://localhost:5000/api')
-//   .then(response => response.json())
-//   .then(data => console.log(data));
+export const getFilms = async () => {
+  const response = await fetch(FILM_URL);
+
+  return response.json();
+};
+
+export const addFilm = async (title) => {
+  const response = await fetch(FILM_URL, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({ title }),
+  });
+
+  return response.json();
+};
+
+export const removeFilm = async (filmId) => {
+  const response = await fetch(`${FILM_URL}/${filmId}`, {
+    method: 'delete',
+  });
+
+  return response.json();
+};
