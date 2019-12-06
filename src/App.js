@@ -4,11 +4,17 @@ import { AddFilmForm } from './components/AddFilmsForm';
 import './App.scss';
 
 import * as getApi from './api/getApi';
+import { Route, Switch} from "react-router-dom";
+import {ShowInfo} from "./components/showInfo";
+import {Header} from "./components/Header";
+
 
 class App extends React.PureComponent {
   state = {
     films: [],
     forFilter: '',
+    actualFilm: '',
+    filterToShow: null,
   };
 
   componentDidMount() {
@@ -20,8 +26,8 @@ class App extends React.PureComponent {
     this.setState({ films });
   }
 
-  addFilm = async (title) => {
-    await getApi.addFilm(title);
+  addFilm = async (title, year) => {
+    await getApi.addFilm(title, year);
     this.refreshFilms();
   };
 
@@ -56,27 +62,54 @@ class App extends React.PureComponent {
     }
     this.setState(prevState => ({
       ...prevState,
-      films: toState,
+      filterToShow: toState,
     }));
   };
 
+  getFilmToShow = (film) => {
+    this.setState(prevState => ({
+      ...prevState,
+      actualFilm: film,
+    }))
+  };
+
+  resetList = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      filterToShow: '',
+    }))
+  };
+
   render() {
-    const { films } = this.state;
+    const { films, actualFilm, filterToShow } = this.state;
 
     return (
-      <div className="App">
-        <h1>home</h1>
-        <AddFilmForm
-          addFilm={this.addFilm}
-        />
-        <button type="button" onClick={() => this.sortFilms()}>Sort</button>
-        <input type="text" onChange={(e) => this.setForFilter(e.target.value)}/>
-        <button type="button" onClick={() => this.filter('title')}>Filter By Title</button>
-        <FilmList
-          films={films}
-          removeFilm={this.removeFilm}
-        />
-      </div>
+      <Switch>
+        <div className="App">
+          <Header
+            filter={this.filter}
+            setForFilter={this.setForFilter}
+            sortFilms={this.sortFilms}
+            resetList={this.resetList}
+          />
+
+          <Route exact path="/add">
+            <AddFilmForm addFilm={this.addFilm} />
+          </Route>
+          <Route exact path="/">
+            <FilmList
+              filterToShow={filterToShow}
+              films={films}
+              removeFilm={this.removeFilm}
+              getFilmToShow={this.getFilmToShow}
+              actualFilm={actualFilm}
+            />
+          </Route>
+          <Route exact path="/info">
+            <ShowInfo actualFilm={actualFilm} />
+          </Route>
+        </div>
+      </Switch>
     );
   }
 }

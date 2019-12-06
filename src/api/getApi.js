@@ -7,13 +7,13 @@ export const getFilms = async () => {
   return response.json();
 };
 
-export const addFilm = async (title) => {
+export const addFilm = async (title, year) => {
   const response = await fetch(FILM_URL, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
-    body: JSON.stringify({ title }),
+    body: JSON.stringify({ title, year }),
   });
 
   return response.json();

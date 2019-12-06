@@ -1,44 +1,41 @@
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react';
+import {NavLink, Switch} from "react-router-dom";
 import './FilmList.scss';
-import { ShowInfo } from '../showInfo';
 
-export class FilmList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      actualFilm: '',
-    }
-  }
-
-  getFilmToShow = (film) => {
-    this.setState(prevState => ({
-      ...prevState,
-      actualFilm: film,
-    }))
-  };
-
-  render() {
-    const { actualFilm } = this.state;
-    const { films, removeFilm } = this.props;
-
-    return (
-      <div>
-        <ul className="form__list">
-          {films.map(film => (
-            <li key={film.id} className="form__film overlay blue">
-              <label title={film.id} className="form__title">
+export const FilmList = ({ films, removeFilm, getFilmToShow, actualFilm, filterToShow }) => {
+  return (
+    <Switch>
+      <div className="list">
+        <ul className="list__list">
+          {(!filterToShow ? films : filterToShow).map(film => (
+            <li key={film.id} className="list__film overlay blue">
+              <label title={film.id} className="list__title">
                 {film.title}
               </label>
-              <div className="form__button">
-                <Button onClick={() => removeFilm(film.id)} className="form__button-delete delete" pure icon><Icon name="remove" /></Button>
-                <Button onClick={() => this.getFilmToShow(film)} className="form__button-info info">show info</Button>
+              <div className="list__button">
+                <Button
+                  onClick={() => removeFilm(film.id)}
+                  className="list__button-delete delete"
+                  style={{backgroundColor: 'transparent'}}
+                >
+                  <Icon name="trash" />
+                </Button>
+                <NavLink to="/info">
+                  <Button
+                    onClick={() => getFilmToShow(film)}
+                    className="form__button-info info"
+                    style={{backgroundColor: 'transparent'}}
+                  >
+                    <Icon name="info circle" />
+                  </Button>
+                </NavLink>
               </div>
             </li>
           ))}
         </ul>
-        <ShowInfo actualFilm={actualFilm} />
+
       </div>
-    );
-  }
+    </Switch>
+  );
 }
