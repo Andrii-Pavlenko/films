@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 5000;
 
 const { getFilms, addFilm, removeFilm } = require('./server/films');
 
@@ -24,10 +24,6 @@ app.delete('/api/films/:filmId', (req, res) => {
 
   res.json({ status: 'success' });
 });
-
-// app.get('/', (req, res) => {
-//   res.json('hello')
-// });
 
 app.use(express.static('build'));
 
