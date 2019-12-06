@@ -24,7 +24,7 @@ export const Header = ({ sortFilms, setForFilter, filter, resetList }) => {
         <div className="header__changers-filters">
           <Input type="text" onChange={(e) => setForFilter(e.target.value)} className="header__changers-filters1" placeholder="Set filter value!"/>
           <select className="ui compact selection dropdown">
-            <option selected="" value="all">title</option>
+            <option value="all">title</option>
             <option value="articles">year</option>
             <option value="products">format</option>
             <option value="products">actors</option>

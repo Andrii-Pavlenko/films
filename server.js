@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 const { getFilms, addFilm, removeFilm } = require('./server/films');
 
 app.use((req, res, next) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:5000');
+  res.set('Access-Control-Allow-Origin', 'http://localhost:80');
   res.set('Access-Control-Allow-Headers', 'content-type');
   res.set('Access-Control-Allow-Methods', 'DELETE');
 
@@ -18,7 +18,7 @@ app.get('/api/films', (req, res) => {
 });
 
 app.post('/api/films', bodyParser.json(), (req, res) => {
-  addFilm(req.body.title, req.body.year);
+  addFilm(req.body.title, req.body.year, req.body.format, req.body.stars, req.body.image);
   const films = getFilms();
 
   res.json(films[films.length - 1]);

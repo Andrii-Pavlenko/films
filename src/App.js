@@ -26,8 +26,8 @@ class App extends React.PureComponent {
     this.setState({ films });
   }
 
-  addFilm = async (title, year) => {
-    await getApi.addFilm(title, year);
+  addFilm = async (title, year, format, stars, image) => {
+    await getApi.addFilm(title, year, format, stars, image);
     this.refreshFilms();
   };
 

@@ -6,6 +6,9 @@ export const AddFilmForm = ({ addFilm }) => {
 
   const [title, setTitle] = useState('');
   const [year, setYear] = useState('');
+  const [format, setFormat] = useState('');
+  const [stars, setStars] = useState([]);
+  const [image, setImage] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,9 +17,12 @@ export const AddFilmForm = ({ addFilm }) => {
       return;
     }
 
-    addFilm(title, year);
+    addFilm(title, year, format, stars, image);
     setTitle('');
     setYear('');
+    setFormat('');
+    setStars([]);
+    setImage('');
   };
 
   return (
@@ -53,8 +59,8 @@ export const AddFilmForm = ({ addFilm }) => {
         </div>
         <Input
           type="text"
-          value={year}
-          onChange={event => setYear(event.target.value)}
+          value={format}
+          onChange={event => setFormat(event.target.value)}
           className="form__input"
           placeholder="Set movie format!"
         />
@@ -66,8 +72,9 @@ export const AddFilmForm = ({ addFilm }) => {
         </div>
         <Input
           type="text"
-          value={year}
-          onChange={event => setYear(event.target.value)}
+
+          value={stars}
+          onChange={event => setStars(event.target.value.split(/, |\. |; |,|\.|;+/g))}
           className="form__input"
           placeholder="Set the lead actors!"
         />
@@ -79,8 +86,8 @@ export const AddFilmForm = ({ addFilm }) => {
         </div>
         <Input
           type="text"
-          value={year}
-          onChange={event => setYear(event.target.value)}
+          value={image}
+          onChange={event => setImage(event.target.value)}
           className="form__input"
           placeholder="Set background image!"
         />
