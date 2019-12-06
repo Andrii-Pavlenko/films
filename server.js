@@ -1,17 +1,12 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 80;
 
 const { getFilms, addFilm, removeFilm } = require('./server/films');
 
-app.use((req, res, next) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.set('Access-Control-Allow-Headers', 'content-type');
-  res.set('Access-Control-Allow-Methods', 'DELETE');
-
-  next();
-});
+app.use(cors());
 
 app.get('/api/films', (req, res) => {
   res.json(getFilms())
@@ -28,6 +23,10 @@ app.delete('/api/films/:filmId', (req, res) => {
   removeFilm(req.params.filmId);
 
   res.json({ status: 'success' });
+});
+
+app.get('/', (req, res) => {
+  res.json('hello')
 });
 
 app.use(express.static('build'));
