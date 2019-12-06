@@ -25,9 +25,9 @@ app.delete('/api/films/:filmId', (req, res) => {
   res.json({ status: 'success' });
 });
 
-app.get('/', (req, res) => {
-  res.json('hello')
-});
+// app.get('/', (req, res) => {
+//   res.json('hello')
+// });
 
 app.use(express.static('build'));
 
