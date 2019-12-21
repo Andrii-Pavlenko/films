@@ -177,14 +177,14 @@ const getFilms = () => {
   return films;
 };
 
-const addFilm = (title, year, format, stars, image) => {
+const addFilm = (values) => {
   const newFilm = {
     id: uuid(),
-    title: title,
-    year: year,
-    format: format,
-    stars: stars,
-    image: image,
+    title: values.title.title,
+    year: values.year,
+    format: values.format,
+    stars: values.stars,
+    image: values.image,
   };
 
   films = [...films, newFilm];

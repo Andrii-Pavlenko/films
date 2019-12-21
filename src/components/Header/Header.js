@@ -3,7 +3,7 @@ import {Button, Input} from "semantic-ui-react";
 import {NavLink} from "react-router-dom";
 import './Header.scss';
 
-export const Header = ({ sortFilms, setForFilter, filter, resetList }) => {
+export const Header = ({ sortFilms, setForFilter, filter, resetList, setSelectForFilter }) => {
   return (
     <div className="header">
 
@@ -22,14 +22,18 @@ export const Header = ({ sortFilms, setForFilter, filter, resetList }) => {
       <div className="header__changers">
         <Button type="button" onClick={() => sortFilms()} className="ui inverted button">Sort</Button>
         <div className="header__changers-filters">
-          <Input type="text" onChange={(e) => setForFilter(e.target.value)} className="header__changers-filters1" placeholder="Set filter value!"/>
-          <select className="ui compact selection dropdown">
-            <option value="all">title</option>
-            <option value="articles">year</option>
-            <option value="products">format</option>
-            <option value="products">actors</option>
+          <Input
+            type="text" onChange={(e) => setForFilter(e.target.value)} 
+            className="header__changers-filters1" 
+            placeholder="Set filter value!"
+          />
+          <select className="ui compact selection dropdown" onChange={(e) => setSelectForFilter(e.target.value)}>
+            <option value="title">Title</option>
+            <option value="year">Year</option>
+            <option value="format">Format</option>
+            <option value="actors">Actors</option>
           </select>
-          <div className="ui inverted button header__changers-filters2" onClick={() => filter('title')}>Filter</div>
+          <div className="ui inverted button header__changers-filters2" onClick={() => filter()}>Filter</div>
         </div>
       </div>
 

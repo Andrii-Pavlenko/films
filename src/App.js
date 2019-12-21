@@ -15,6 +15,7 @@ class App extends React.PureComponent {
     forFilter: '',
     actualFilm: '',
     filterToShow: null,
+    selectForFilter: 'title',
   };
 
   componentDidMount() {
@@ -26,8 +27,8 @@ class App extends React.PureComponent {
     this.setState({ films });
   }
 
-  addFilm = async (title, year, format, stars, image) => {
-    await getApi.addFilm(title, year, format, stars, image);
+  addFilm = async (values) => {
+    await getApi.addFilm(values);
     this.refreshFilms();
   };
 
@@ -43,6 +44,13 @@ class App extends React.PureComponent {
     }))
   };
 
+  setSelectForFilter = (value) => {
+    this.setState(prevState => ({
+      ...prevState,
+      selectForFilter: value,
+    }))
+  }
+
   setForFilter = (value) => {
     this.setState(prevState => ({
       ...prevState,
@@ -50,12 +58,23 @@ class App extends React.PureComponent {
     }))
   };
 
-  filter = (name) => {
+  filter = () => {
     let toState;
 
-    switch (name) {
+    let { films, selectForFilter, forFilter } = this.state;
+
+    switch (selectForFilter) {
       case 'title':
-        toState = this.state.films.filter(item => item.title.toLowerCase().includes(this.state.forFilter));
+        toState = films.filter(item => item.title.toLowerCase().includes(forFilter));
+        break;
+      case 'year':
+        toState = films.filter(item => item.year.toLowerCase().includes(forFilter));
+        break;
+      case 'format':
+        toState = films.filter(item => item.format.toLowerCase().includes(forFilter));
+        break;
+      case 'stars':
+        toState = films.filter(item => item.stars.toLowerCase().includes(forFilter));
         break;
       default:
         return this.state
@@ -91,6 +110,7 @@ class App extends React.PureComponent {
             setForFilter={this.setForFilter}
             sortFilms={this.sortFilms}
             resetList={this.resetList}
+            setSelectForFilter={this.setSelectForFilter}
           />
 
           <Route exact path="/add">
